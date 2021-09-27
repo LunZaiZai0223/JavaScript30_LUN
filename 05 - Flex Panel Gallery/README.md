@@ -17,3 +17,5 @@
 - 分段觸發事件
   - 一開始以為都是用 `click` 觸發事件，但是這樣子會導致同時 toggle className，畫面效果同時出現
   - 影片是 `click + transitioned` 事件，click 事件的任務是 toggle className(新增 transition 效果)，有 CSS transition 就可以用 transitioned 事件監聽，再 toggle className(讓字移動)，這樣子畫面就會看起來有順序
+- 解決瀏覽器不同的問題
+  - 影片說明中說道：flex 變化在 chrome 為 flex-grow 事件，在 safari 為 flex 事件，可用 if (e.propertyName.includes('flex')) => 只要 propertyName 有 'flex' 就Ok!
