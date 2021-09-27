@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>05 - Flex Panel Gallery</title>
+		<link rel="stylesheet" href="./app.css">
+		<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div class="panels">
+			<div class="panel panel1">
+				<p>Hey</p>
+				<p>Taiwan</p>
+				<p>NICE</p>
+			</div>
+			<div class="panel panel2">
+				<p>Hey</p>
+				<p>Taipei</p>
+				<p>Good</p>
+			</div>
+			<div class="panel panel3">
+				<p>Hey</p>
+				<p>taichung</p>
+				<p>great</p>
+			</div>
+			<div class="panel panel4">
+				<p>Hey</p>
+				<p>Tainan</p>
+				<p>Super</p>
+			</div>
+			<div class="panel panel5">
+				<p>Hey</p>
+				<p>Hualien</p>
+				<p>beautiful</p>
+			</div>
+		</div>
+	</body>
+	<script>
+		const panel = document.querySelectorAll('.panel');
+		function toggleOpenActive (event) {
+			// 用 transitioned event => 確認有 transition 的屬性包括 'flex' 才會觸發事件 => 達到分段的效果
+			// 原本都用 click 的話就會看不清楚有分段
+		  const propertyName = (event.propertyName);
+		  if (propertyName.includes('flex')) {
+		  	this.classList.toggle('open-active');
+		  }
+		}
+		function toggleOpen () {
+			this.classList.toggle('open');
+		}
+		panel.forEach( p => {
+		  // p.addEventListener('click', toggleOpenActive);
+		  p.addEventListener('click', toggleOpen);
+		  p.addEventListener('transitionend', toggleOpenActive);
+		});
+	</script>
+</html>
