@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Array Cardio 💪</title>
+</head>
+<body>
+  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <script>
+    // Get your shorts on - this is an array workout!
+    // ## Array Cardio Day 1
+
+    // Some data we can work with
+
+    const inventors = [
+      { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
+      { first: 'Isaac', last: 'Newton', year: 1643, passed: 1727 },
+      { first: 'Galileo', last: 'Galilei', year: 1564, passed: 1642 },
+      { first: 'Marie', last: 'Curie', year: 1867, passed: 1934 },
+      { first: 'Johannes', last: 'Kepler', year: 1571, passed: 1630 },
+      { first: 'Nicolaus', last: 'Copernicus', year: 1473, passed: 1543 },
+      { first: 'Max', last: 'Planck', year: 1858, passed: 1947 },
+      { first: 'Katherine', last: 'Blodgett', year: 1898, passed: 1979 },
+      { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
+      { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
+      { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
+      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
+    ];
+
+    const people = [
+      'Bernhard, Sandra', 'Bethea, Erin', 'Becker, Carl', 'Bentsen, Lloyd', 'Beckett, Samuel', 'Blake, William', 'Berger, Ric', 'Beddoes, Mick', 'Beethoven, Ludwig',
+      'Belloc, Hilaire', 'Begin, Menachem', 'Bellow, Saul', 'Benchley, Robert', 'Blair, Robert', 'Benenson, Peter', 'Benjamin, Walter', 'Berlin, Irving',
+      'Benn, Tony', 'Benson, Leana', 'Bent, Silas', 'Berle, Milton', 'Berry, Halle', 'Biko, Steve', 'Beck, Glenn', 'Bergman, Ingmar', 'Black, Elk', 'Berio, Luciano',
+      'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
+      'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
+    ];
+    
+    // Array.prototype.filter()
+    // 1. Filter the list of inventors for those who were born in the 1500's
+    const first = inventors.filter(person => person.year >= 1500 && person.year < 1600 );
+    // 會以 table 的形式被印出來
+    console.table(first);
+    console.log(first);
+
+    // Array.prototype.map()
+    // 2. Give us an array of the inventors first and last names
+    const second = inventors.map(person => `${person.first} ${person.last}`);
+    // const second = inventors.map(function (person) {
+    //   return `${person.first} ${person.last}`;
+    // });
+    console.log(second);
+
+    // Array.prototype.sort()
+    // 3. Sort the inventors by birthdate, oldest to youngest
+
+    // const third = inventors.sort(function (fistPerson, secondPerson) {
+    //   if (fistPerson.year > secondPerson.year) return 1;
+    //   if (fistPerson.year < secondPerson.year) return -1;
+    //   return 0;
+    // });
+
+    // 可省略為
+    const third = inventors.sort((firstPerson, secondPerson) => firstPerson.year > secondPerson.year ? 1 : -1);
+    console.table(third);
+
+    // Array.prototype.reduce()
+    // 4. How many years did all the inventors live all together?
+    const fourth = inventors.reduce((total, inventors) => {
+      return total += inventors.passed - inventors.year;
+    }, 0);
+    console.log(fourth);
+
+    // 5. Sort the inventors by years lived
+
+    // const fifth = inventors.sort((a,b) => {
+    //   if (a.passed - a.year > b.passed - b.year) { return 1; }
+    //   if (a.passed - a.year < b.passed - b.year) { return -1; }
+    //   return 0;
+    // });
+
+    const fifth = inventors.sort((firstPersn, secondPerson) =>{
+      firstPersn.passed - firstPersn.year > secondPerson.passed - secondPerson.year ? -1 : 1;
+    });
+    console.table(fifth);
+
+    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // 此題要在該網址中實作
+
+    // const category = document.querySelectorAll('.mw-category a');
+    // // 因為 nodeList 不是 Array 
+    // // Array.from => 轉換成 Array
+    // // 或用 [...category] 展開運算子，會把東西解放，解放完又被放在 Array [] 裡面 XD
+    // const link = Array.from(category);
+    // // 可以多重執行方法
+    // const linkContent = link.map(link => link.textContent).filter(name => name.includes('de'));
+
+    // 7. sort Exercise
+    // Sort the people alphabetically by last name
+
+    const seventh = people.sort((firstPerson, lastPerson) => {
+      const [firstLast, firstFirst] = firstPerson.split(', ');
+      const [secondLast, secondFirst] = lastPerson.split(', ');
+      return firstLast > secondLast ? 1 : -1;
+    });
+
+    console.log(seventh);
+
+    // 8. Reduce Exercise
+    // Sum up the instances of each of these
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const eighth = data.reduce((accumulator, currentValue) => {
+      if (accumulator[currentValue]) { 
+        accumulator[currentValue] ++; 
+      } else {
+        accumulator[currentValue] = 1;
+      }
+      // 要 return accumulator 要不然第 1 次 loop 後就沒有 accumulator 了
+      return accumulator;
+    },{});
+    console.log(eighth);
+
+  </script>
+</body>
+</html>
