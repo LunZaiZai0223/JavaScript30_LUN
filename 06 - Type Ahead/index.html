@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+// fetch 會回傳 promise 
+// arrowFunc => one-line statement = function(){ return ... }
+// 第一次會回傳的 response 還需要進一步解析才是真正的資料 (再 promise)
+const cities = [];
+const searchInput = document.querySelector('.search');
+const suggestionsUl = document.querySelector('.suggestions');
+
+const prom = fetch(endpoint)
+   .then(response => response.json())
+   // 解構 array ，讓 cities 中只有一個 array
+   .then(data => cities.push(...data));
+
+
+function searchCities (wordToMatch, cities) {
+  return cities.filter(place => {
+      // 要查找複雜的資料用正規表達式比較容易
+      // 建立正規式的物件 new RegExp('查找的資料', '規則')
+      //    => g: global, i: sensitive 兩者搭配 = 找全部的資料且不區分大小寫
+      let regexp = new RegExp(wordToMatch, 'gi');
+      // string.match(regExp) 
+      //    => regExp 一個正規表達式的物件。 若傳入一個非正規表達式的物件obj，則會視為傳入 new RegExp(obj)。
+      //    => 此方法就只接受 regExp（正規表達式的物件）
+
+      // filter 回傳符合的資料
+      return place.city.match(regexp) || place.state.match(regexp);
+  });
+}
+
+function displayResult () {
+  const searchValue = this.value;
+  const searchResult = searchCities(searchValue, cities);
+  createDOM(searchValue, searchResult);
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function createDOM (searchValue, searchResult) {
+  const html = searchResult.map(place => {
+    const regexp = new RegExp(searchValue, 'gi');
+    const cityName = place.city.replace(regexp, `<span class="hl">${searchValue}</span>`);
+    const stateName = place.state.replace(regexp, `<span class="hl">${searchValue}</span>`);
+    return `
+    <li>
+      <span class="name">${cityName}, ${stateName}</span>
+      <span class="population">${numberWithCommas(place.population)}</span>
+    </li>
+    `
+  }).join('');
+  suggestionsUl.innerHTML = html;
+}
+
+searchInput.addEventListener('change', displayResult);
+// keyup event => 使用者的鍵盤起來後觸發
+searchInput.addEventListener('keyup', displayResult);
+
+</script>
+</body>
+</html>
