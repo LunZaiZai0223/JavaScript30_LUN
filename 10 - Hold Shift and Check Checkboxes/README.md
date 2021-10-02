@@ -13,15 +13,15 @@
 ### 動作拆解（盡可能將動作完全拆解）
 #### 單選
 1. 直接點擊一個 checkbox 就可以了
-  - 選了就會直接打勾 / 再次點擊就會取消選取
+    - 選了就會直接打勾 / 再次點擊就會取消選取
 #### 複選
 1. 要先點擊一個 checkbox 
-  - 當作基準點（A 點）
+    - 當作基準點（A 點）
 2. 按下 shift 再按第二個 checkbox，此時兩點之間的 checkboxes 就會被選取
-  - 有按下 shift 就會觸發任務 => 選取 A, B 兩點間的 checkboxes
-  - 所以電腦要知道哪一個是 A 點、哪一個是 B 點以及哪些是 A, B 兩點中要一併被選取的 checkboxes
+    - 有按下 shift 就會觸發任務 => 選取 A, B 兩點間的 checkboxes
+    - 所以電腦要知道哪一個是 A 點、哪一個是 B 點以及哪些是 A, B 兩點中要一併被選取的 checkboxes
     - 要先點一次才可以知道哪個是 A 點
-  - 新增一個開關（boolean），這個開關可以讓電腦知道哪些是 A, B 兩點之間的 checkboxes
+    - 新增一個開關（boolean），這個開關可以讓電腦知道哪些是 A, B 兩點之間的 checkboxes
 ```javaScript
 const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 // 要讓電腦知道第二點在哪裡 => 將變數放在函式外層，確保之後還用得到該變數
@@ -57,11 +57,10 @@ function handler (event) {
 }
 ```
 #### 取消複選
-1-1. 原路回去
-  - 複選完之後馬上 shift + 點擊原本的 A 點
-1-2. 先點一點選取的 checkbox 當作新 A 點
+1-1. 原路回去 => 複選完之後馬上 shift + 點擊原本的 A 點 or <br>
+1-2. 先點一點選取的 checkbox 當作新 A 點 <br>
 2. 再點另一點已選取的 checkbox 當作新 B 點，此時 A, B 兩點已選擇的 checkboxes 都會取消選取
-  - 點擊一點，該點就會 選取 / 取消選取，所以要注意的就是如何讓電腦知道 A, B 點之間的 checkboxes 是哪些
+    - 點擊一點，該點就會 選取 / 取消選取，所以要注意的就是如何讓電腦知道 A, B 點之間的 checkboxes 是哪些
 ```javaScript
 const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 let lastChecked;
