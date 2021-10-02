@@ -1,6 +1,6 @@
 # 10 - Hold Shift and Check Checkboxes
 ## 任務介紹
-講解如何運用 JavaScript + HTML checkbox 達到 Gmail shift 選取多個 / 取消選取多個 checkbox。
+講解如何運用 JavaScript + HTML checkbox 達到像 Gmail shift 選取多個 / 取消選取多個 checkbox。
   - shift 點擊複選 / 取消複選
 這個任務我覺得蠻難的 ~~（到底哪個你覺得容易？）~~ 一開始自己想的時候還往先監聽是否按 shift (`keyup event`)再來監聽是否有點擊到 checkbox (`click event`)。結果後來看影片實作發現 `click event` 本身就有一個 `shiftKey` property (boolean) 用來確認點擊的時候是否有按 shift 鍵。
 ## JavaScript 
