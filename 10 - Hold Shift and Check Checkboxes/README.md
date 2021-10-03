@@ -107,3 +107,4 @@ function handler (event) {
 這次排版的樣子也很適合拿來做 todolist！也許下個專案可以拿來用！
 ## 感謝
 此次挑戰其實就只有全選的功能而已，取消複選是我自己想要挑戰的。結果想著想著...竟然過了 1 小時都沒任何想法，好險看了其他大神們之前的[挑戰筆記](https://guahsu.io/2017/07/JavaScript30-10-Hold-Shift-and-Check-Checkboxes/)，才有一些突破，真的是很感謝在網路上分享筆記的大神們！
+10/03 更新：在 stackoverflow 炸到大神用 jQuery 實作的[範例](https://stackoverflow.com/questions/659508/how-can-i-shift-select-multiple-checkboxes-like-gmail)
